@@ -1,5 +1,5 @@
 export class Animal {
-  constructor(public name: string) {}
+  constructor(protected name: string) {}
 
   move() {
     console.log('Moving along!');
@@ -7,6 +7,10 @@ export class Animal {
 
   greeting() {
     return `Hello, I'm ${this.name}`;
+  }
+
+  protected doSomething() {
+    console.log('dooo');
   }
 }
 
@@ -21,17 +25,20 @@ export class Dog extends Animal {
 
   woof(times: number): void {
     for (let index = 0; index < times; index++) {
-      console.log('woof!');
+      console.log(`woof! ${this.name}`);
     }
+    this.doSomething();
+  }
+
+  move() {
+    // code
+    console.log('moving as a dog');
+    super.move();
   }
 }
 
-const fifi = new Animal('fifi');
-fifi.move();
-console.log(fifi.greeting());
-
 const cheis = new Dog('cheis', 'Miguel');
+// cheis.name = 'otro nombre';
+cheis.woof(1);
+// cheis.doSomething();
 cheis.move();
-console.log(cheis.greeting());
-cheis.woof(5);
-console.log(cheis.owner);
